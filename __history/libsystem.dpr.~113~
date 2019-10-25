@@ -1,0 +1,30 @@
+library libsystem;
+
+uses
+  System.SysUtils,
+  System.Classes,
+  uValidador in 'uValidador.pas';
+
+{$R *.res}
+
+function RegisterSystem(Token: String): Boolean; stdcall;
+begin
+  Result := ValidarToken(Token);
+end;
+
+function RegisterDate(Token: String): Boolean; stdcall;
+begin
+  Result := ValidarToken(Token);
+end;
+
+function RegisterAcess(User, Password: String): Boolean; stdcall;
+begin
+  Result := ValidarMaster(User, Password);
+end;
+
+exports
+  RegisterSystem,
+  RegisterAcess;
+
+
+end.

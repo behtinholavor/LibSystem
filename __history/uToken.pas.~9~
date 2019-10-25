@@ -1,0 +1,23 @@
+unit uToken;
+
+interface
+
+uses
+  System.Classes;
+
+type
+  TToken = class
+    function AuthToken(Token: String): Boolean;
+  private
+    { Private declarations }
+    FTokenList: TStringList;
+  public
+    { Public declarations }
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+
+end.

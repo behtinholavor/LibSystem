@@ -1,0 +1,71 @@
+unit uSecurity;
+
+interface
+
+uses
+  System.Classes;
+
+type
+  TAuthenticate = class
+  private
+    { Private declarations }
+    TokenList: TStringList;
+    UserMaster: String;
+    PasswordMaster: String;
+  public
+    { Public declarations }
+    constructor Create;
+    destructor Destroy; override;
+    function Instance: TAuthenticate;
+    function ValidateToken(Token: string): Boolean;
+    function ValidateMaster(User, Password: String): Boolean;
+  end;
+
+var
+  Instance: TAuthenticate;
+
+implementation
+
+{ TAuthenticate }
+
+constructor TAuthenticate.Create;
+begin
+  TokenList := TStringList.Create;
+
+  TokenList.Add('014bef6c-5c96-42dc-8372-602fb7f713e7');
+  TokenList.Add('093ba48d-85e6-484d-8d43-a0be23b39985');
+  TokenList.Add('e73995cd-92e5-4723-8a5b-8c3c1a97f2d4');
+  TokenList.Add('a0c626bf-9e95-40f8-91e8-1164e259749f');
+  TokenList.Add('69c5f101-4d53-471f-a278-0ce31df55ffa');
+end;
+
+function TAuthenticate.ValidateToken(Token: string): Boolean;
+begin
+  Result := TokenList.IndexOf(Token) > 0;
+end;
+
+function TAuthenticate.ValidateMaster(User, Password: String): Boolean;
+begin
+  Result := (User = 'root') and (Password = '1q2w3e');
+end;
+
+destructor TAuthenticate.Destroy;
+begin
+  TokenList.Free;
+  inherited;
+end;
+
+function TAuthenticate.Instance: TAuthenticate;
+begin
+  if Instance = nil then
+    Instance := TAuthenticate.Create;
+  Result := Instance;
+end;
+
+initialization
+  Instance.Create;
+
+finalization
+  Instance.Free;
+
+end.

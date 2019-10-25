@@ -1,0 +1,23 @@
+unit uToken;
+
+interface
+
+uses
+  System.Classes;
+
+type
+  TToken = class
+  private
+    { Private declarations }
+    FTokenList: TStringList;
+  public
+    { Public declarations }
+    constructor Create;
+    destructor Destroy; override;
+    function GetDisplayList: TStringList;
+  end;
+
+implementation
+
+
+end.
